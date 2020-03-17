@@ -1,4 +1,4 @@
-# fifth_firestore
+# flutter_firestore
 
 A new Flutter project.
 
