@@ -1,0 +1,141 @@
+I/flutter (15395): (elided 4 frames from package dart:async and package dart:async-patch)
+I/flutter (15395):
+I/flutter (15395): Image provider: AssetImage(bundle: null, name: "images/pubg2.png")
+I/flutter (15395): Image key: AssetBundleImageKey(bundle: PlatformAssetBundle#42ed3(), name: "images/pubg2.png", scale:
+I/flutter (15395):   1.0)
+I/flutter (15395): ════════════════════════════════════════════════════════════════════════════════════════════════════
+I/flutter (16285): ══╡ EXCEPTION CAUGHT BY IMAGE RESOURCE SERVICE ╞════════════════════════════════════════════════════
+I/flutter (16285): The following assertion was thrown resolving an image codec:
+I/flutter (16285): Unable to load asset: images/calculator_icon.png
+I/flutter (16285):
+I/flutter (16285): When the exception was thrown, this was the stack:   
+I/flutter (16285): #0      PlatformAssetBundle.load (package:flutter/src/services/asset_bundle.dart:221:7)
+I/flutter (16285): <asynchronous suspension>
+I/flutter (16285): #1      AssetBundleImageProvider._loadAsync (package:flutter/src/painting/image_provider.dart:484:44)
+I/flutter (16285): #2      AssetBundleImageProvider.load (package:flutter/src/painting/image_provider.dart:469:14)
+I/flutter (16285): #3      ImageProvider.resolve.<anonymous closure>.<anonymous closure>.<anonymous closure> (package:flutter/src/painting/image_provider.dart:327:17)
+I/flutter (16285): #4      ImageCache.putIfAbsent (package:flutter/src/painting/image_cache.dart:160:22)
+I/flutter (16285): #5      ImageProvider.resolve.<anonymous closure>.<anonymous closure> (package:flutter/src/painting/image_provider.dart:325:84)
+I/flutter (16285): (elided 13 frames from package dart:async)
+I/flutter (16285):
+I/flutter (16285): Image provider: AssetImage(bundle: null, name: "images/calculator_icon.png")
+I/flutter (16285): Image key: AssetBundleImageKey(bundle: PlatformAssetBundle#93650(), name:
+I/flutter (16285):   "images/calculator_icon.png", scale: 1.0)
+I/flutter (16285): ════════════════════════════════════════════════════════════════════════════════════════════════════
+I/flutter (16285): ══╡ EXCEPTION CAUGHT BY GESTURE ╞═══════════════════════════════════════════════════════════════════
+I/flutter (16285): The following FormatException was thrown while handling a gesture:
+I/flutter (16285): Invalid double
+I/flutter (16285): h
+I/flutter (16285): 
+I/flutter (16285): When the exception was thrown, this was the stack:
+I/flutter (16285): #0      double.parse (dart:core-patch/double_patch.dart:112:28)
+I/flutter (16285): #1      _SIFormState._calculateReturns (package:fourth_app/SIForm.dart:195:26)
+I/flutter (16285): #2      _SIFormState.build.<anonymous closure>.<anonymous closure> (package:fourth_app/SIForm.dart:156:54)
+I/flutter (16285): #3      State.setState (package:flutter/src/widgets/framework.dart:1148:30)
+I/flutter (16285): #4      _SIFormState.build.<anonymous closure> (package:fourth_app/SIForm.dart:154:29)
+I/flutter (16285): #5      _InkResponseState._handleTap (package:flutter/src/material/ink_well.dart:706:14)
+I/flutter (16285): #6      _InkResponseState.build.<anonymous closure> (package:flutter/src/material/ink_well.dart:789:36)
+I/flutter (16285): #7      GestureRecognizer.invokeCallback (package:flutter/src/gestures/recognizer.dart:182:24)
+I/flutter (16285): #8      TapGestureRecognizer.handleTapUp (package:flutter/src/gestures/tap.dart:486:11)
+I/flutter (16285): #9      BaseTapGestureRecognizer._checkUp (package:flutter/src/gestures/tap.dart:264:5)
+I/flutter (16285): #10     BaseTapGestureRecognizer.acceptGesture (package:flutter/src/gestures/tap.dart:236:7)
+I/flutter (16285): #11     GestureArenaManager.sweep (package:flutter/src/gestures/arena.dart:156:27)
+I/flutter (16285): #12     GestureBinding.handleEvent (package:flutter/src/gestures/binding.dart:222:20)
+I/flutter (16285): #13     GestureBinding.dispatchEvent (package:flutter/src/gestures/binding.dart:198:22)
+I/flutter (16285): #14     GestureBinding._handlePointerEvent (package:flutter/src/gestures/binding.dart:156:7)
+I/flutter (16285): #15     GestureBinding._flushPointerEventQueue (package:flutter/src/gestures/binding.dart:102:7)
+I/flutter (16285): #16     GestureBinding._handlePointerDataPacket (package:flutter/src/gestures/binding.dart:86:7)
+I/flutter (16285): #20     _invoke1 (dart:ui/hooks.dart:273:10) 
+I/flutter (16285): #21     _dispatchPointerDataPacket (dart:ui/hooks.dart:182:5)
+I/flutter (16285): (elided 3 frames from package dart:async)
+I/flutter (16285):
+I/flutter (16285): Handler: "onTap"
+I/flutter (16285): Recognizer:
+I/flutter (16285):   TapGestureRecognizer#c67d1
+
+
+I/flutter (16285): ════════════════════════════════════════════════════════════════════════════════════════════════════
+Running Gradle task 'assembleDebug'...                                  
+Note: C:\flutter\.pub-cache\hosted\pub.dartlang.org\cloud_firestore-0.13.4+2\android\src\main\java\io\flutter\plugins\firebase\cloudfirestore\CloudFirestorePlugin.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+D8: Cannot fit requested classes in a single dex file (# methods: 83318 > 65536)
+com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives: 
+The number of method references in a .dex file cannot exceed 64K.
+Learn how to resolve this issue at https://developer.android.com/tools/building/multidex.html
+        at com.android.builder.dexing.D8DexArchiveMerger.getExceptionToRethrow(D8DexArchiveMerger.java:131)
+        at com.android.builder.dexing.D8DexArchiveMerger.mergeDexArchives(D8DexArchiveMerger.java:118)
+        at com.android.build.gradle.internal.transforms.DexMergerTransformCallable.call(DexMergerTransformCallable.java:102)
+        at com.android.build.gradle.internal.tasks.DexMergingTaskRunnable.run(DexMergingTask.kt:444)
+        at com.android.build.gradle.internal.tasks.Workers$ActionFacade.run(Workers.kt:335)
+        at org.gradle.workers.internal.AdapterWorkAction.execute(AdapterWorkAction.java:50)
+        at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:47)
+        at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1$1.create(NoIsolationWorkerFactory.java:65)
+        at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1$1.create(NoIsolationWorkerFactory.java:61)
+        at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:98)
+        at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.execute(NoIsolationWorkerFactory.java:61)
+        at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
+        at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor$CallableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:416)
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor$CallableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:406)  
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor$1.execute(DefaultBuildOperationExecutor.java:165)
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:250)
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:158)
+        at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:102)
+        at org.gradle.internal.operations.DelegatingBuildOperationExecutor.call(DelegatingBuildOperationExecutor.java:36)
+        at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)       
+        at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:56)
+        at org.gradle.workers.internal.DefaultWorkerExecutor$3.call(DefaultWorkerExecutor.java:215)
+        at org.gradle.workers.internal.DefaultWorkerExecutor$3.call(DefaultWorkerExecutor.java:210)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+        at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:215)
+        at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:164)
+        at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:131)
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+        at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+        at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)   
+        at java.lang.Thread.run(Thread.java:748)
+Caused by: com.android.tools.r8.CompilationFailedException: Compilation failed to complete
+        at com.android.tools.r8.utils.t.a(:55)
+        at com.android.tools.r8.D8.run(:11)
+        at com.android.builder.dexing.D8DexArchiveMerger.mergeDexArchives(D8DexArchiveMerger.java:116)
+        ... 34 more
+Caused by: com.android.tools.r8.utils.AbortException: Error: null, Cannot fit requested classes in a single dex file (# methods: 83318 > 65536)
+        at com.android.tools.r8.utils.Reporter.a(:21)
+        at com.android.tools.r8.utils.Reporter.a(:7)
+        at com.android.tools.r8.dex.VirtualFile.a(:33)
+        at com.android.tools.r8.dex.VirtualFile$h.a(:5)
+        at com.android.tools.r8.dex.ApplicationWriter.a(:13)
+        at com.android.tools.r8.dex.ApplicationWriter.write(:35)
+        at com.android.tools.r8.D8.d(:44)
+        at com.android.tools.r8.D8.b(:1)
+        at com.android.tools.r8.utils.t.a(:23)
+        ... 36 more
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:mergeDexDebug'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.Workers$ActionFacade
+   > com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives: 
+     The number of method references in a .dex file cannot exceed 64K.
+     Learn how to resolve this issue at https://developer.android.com/tools/building/multidex.html
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.  
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 5m 48s
+Running Gradle task 'assembleDebug'...
+Running Gradle task 'assembleDebug'... Done                       350.0s (!)
+[!] The shrinker may have failed to optimize the Java bytecode.
+    To disable the shrinker, pass the `--no-shrink` flag to this command.
+    To learn more, see: https://developer.android.com/studio/build/shrink-code
+Gradle task assembleDebug failed with exit code 1
+
+C:\Users\AS\Desktop\fifth_firestore>
