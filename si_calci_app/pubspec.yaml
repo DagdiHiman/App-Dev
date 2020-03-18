@@ -1,4 +1,4 @@
-name: third_app
+name: fourth_app
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -42,27 +42,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/chess1.png
-    - images/chess2.png
-    - images/pubg1.png
-    - images/pubg2.jpg
-    - images/pubg3.png
-    - images/cs1.png
-    - images/cs2.jpg
-    - images/int1.png
-    - images/int2.jpg
-    - images/int3.jpg
-    - images/hunt1.png
-    - images/hunt2.png
-    - images/hunt3.png
-    - images/ipl1.png
-    - images/ipl2.png
-    - images/gre2.png
-    - images/gre1.png
-    - images/code1.jpg
-    - images/code2.png
-    - images/code3.png
-    #  - images/a_dot_ham.jpeg
+    - images/calculator_icon.png
+  # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -75,23 +56,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Lato
-      fonts:
-        - asset: fonts/Lato-Black.ttf
-        - asset: fonts/Lato-Italic.ttf
-          weight: 300
-          style: italic
-        - asset: fonts/Lato-Bold.ttf
-          weight: 700
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Black.ttf
-        - asset: fonts/Roboto-Bold.ttf
-          weight: 700
-    - family: Sriracha
-      fonts:
-        - asset: fonts/Sriracha-Regular.ttf
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
