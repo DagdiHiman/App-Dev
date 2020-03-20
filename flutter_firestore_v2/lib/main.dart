@@ -35,12 +35,11 @@ class _CreatToDoState extends State<CreatToDo> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          _myAppBar(context),
-          Center(child: Text('ToDo App'),),
+          _myAppBar(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent[400],
         child: Icon(
           FontAwesomeIcons.plus,
           color: Colors.black,
@@ -49,7 +48,7 @@ class _CreatToDoState extends State<CreatToDo> {
         onPressed: () {
           Navigator.push(context,
            MaterialPageRoute(
-             //builder: (context) => NewTask(),
+             builder: (context) => NewTask(),
              fullscreenDialog: true
            ),
           );
@@ -58,16 +57,11 @@ class _CreatToDoState extends State<CreatToDo> {
     );
   }
 
-  Widget _myAppBar(context){
-    return Container(
-      height: 80.0,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.red,
-        //borderRadius: 8.0,
-
-      ),
+  Widget _myAppBar() {
+    return AppBar(
+      title: const Text('ToDo App',),
+      backgroundColor: Colors.redAccent[400],
+      centerTitle: true,
     );
   }
-
 }
