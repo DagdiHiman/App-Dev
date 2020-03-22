@@ -1,6 +1,18 @@
-# third_app
-
+# IGNITE_app
+```
 A new Flutter project.
+```
+
+## Demo:
+1. <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/4b.png" height=400>
+
+2. <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/four.GIF" height=400>
+
+3. <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/4.png" height=300>
+
+  ```
+  ON-GOING PROJECT
+  ```
 
 ## Getting Started
 
