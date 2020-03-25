@@ -7,3 +7,6 @@ FLUTTER :
 => Hero
 =>flutter_upi
 => transaction
+=> onchanged vs controller
+=> stream builder/ future builder
+
