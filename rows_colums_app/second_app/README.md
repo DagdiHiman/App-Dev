@@ -1,6 +1,10 @@
-# second_app
+# flight_app
+```
+A simple Flutter project describing about rows, column and button.
+```
 
-A new Flutter project.
+## Screenshots:
+1. <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/2.png" height=400>
 
 ## Getting Started
 

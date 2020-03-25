@@ -1,7 +1,10 @@
-# first_app
-
-A new Flutter project.
-
+# random_number_app
+```
+A beginner level Flutter project, which generates random number (between 1-10) at every run.
+```
+## Screenshots:
+=>
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/1.png" height=300>
 ## Getting Started
 
 This project is a starting point for a Flutter application.

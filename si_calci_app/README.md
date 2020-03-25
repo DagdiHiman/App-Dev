@@ -1,6 +1,11 @@
-# fourth_app
+# SI_calci_app
+```
+A Simple Interest Calculator made using Flutter.
+```
 
-A new Flutter project.
+## Screenshots:
+=> 
+ <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/3.png" height=300>
 
 ## Getting Started
 

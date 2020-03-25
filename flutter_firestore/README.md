@@ -1,6 +1,13 @@
 # flutter_firestore
+```
+A basic Flutter x Firebase project.
+```
 
-A new Flutter project.
+## Demo & Screenshots :
+
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/5a.GIF" height=300>
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/5b.png" height=300>
+
 
 ## Getting Started
 
