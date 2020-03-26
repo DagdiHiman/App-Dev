@@ -1,6 +1,12 @@
 # todo_app
-
-A new Flutter project.
+```
+ToDo App made using Flutter.
+```
+## DEMO :
+1. Home Screen
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/Screenshot1.png" width=800>
+2. New Task Screen
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/Screenshot2.png" width=800>
 
 ## Getting Started
 
