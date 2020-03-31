@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "538328998848",
+    "firebase_url": "https://fireweb-4545a.firebaseio.com",
+    "project_id": "fireweb-4545a",
+    "storage_bucket": "fireweb-4545a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538328998848:android:ba99b975dfe28ba57ede25",
+        "android_client_info": {
+          "package_name": "com.example.ninja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538328998848-v6hb91s2rvkb7kosccfnvg82ktctj40i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEvQaS_WSlP_eeI2A203d7Yns0iPQfCk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538328998848-v6hb91s2rvkb7kosccfnvg82ktctj40i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
