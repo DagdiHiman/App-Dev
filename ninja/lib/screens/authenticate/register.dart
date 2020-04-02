@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninja/services/auth.dart';
 import 'package:ninja/shared/loading.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Register extends StatefulWidget {
 
@@ -31,7 +32,9 @@ class _RegisterState extends State<Register> {
         title: Text(
           "Coffee Crew",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 23.0, fontWeight: FontWeight.w700, color: Colors.blueAccent),
+          style: GoogleFonts.lato(
+            textStyle: TextStyle(fontSize: 27.0, fontWeight: FontWeight.w700, color: Colors.blueAccent),
+          ),
         ),
         elevation: 2.0,
         backgroundColor: Colors.blue[50],
@@ -40,7 +43,11 @@ class _RegisterState extends State<Register> {
               onPressed: () {
                 widget.toggleView();
               },
-            label: Text("SignIn", style: TextStyle(fontSize:17.0, fontWeight: FontWeight.w400 ),),
+            label: Text("SignIn",
+              style: GoogleFonts.ubuntuCondensed(
+                textStyle: TextStyle(fontSize:17.0, fontWeight: FontWeight.w400),
+              ),
+            ),
             icon: Icon(Icons.person, color: Colors.red, size: 28.0,),
           ),
         ],
@@ -138,7 +145,9 @@ class _RegisterState extends State<Register> {
                               side: BorderSide(color: Colors.white)),
                           child: Text(
                             "REGISTER",
-                            style: TextStyle(fontSize: 20.0),
+                            style: GoogleFonts.ubuntu(
+                              textStyle: TextStyle(fontSize: 20.0),
+                            ),
                           ),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {

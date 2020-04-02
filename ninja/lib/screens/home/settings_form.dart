@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ninja/models/user.dart';
 import 'package:ninja/services/database.dart';
 import 'package:ninja/shared/constant.dart';
@@ -37,7 +38,9 @@ class _SettingsFormState extends State<SettingsForm> {
                 children: <Widget>[
                   Text(
                     'Update your brew settings.',
-                    style: TextStyle(fontSize: 18.0),
+                    style: GoogleFonts.ubuntu(
+                      textStyle: TextStyle(fontSize: 18.0),
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
@@ -53,7 +56,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     items: sugars.map((sugar) {
                       return DropdownMenuItem(
                         value: sugar,
-                        child: Text('$sugar sugars'),
+                        child: Text('$sugar sugars', style: GoogleFonts.ubuntu(),),
                       );
                     }).toList(),
                     onChanged: (val) => setState(() => _currentSugars = val ),
@@ -75,7 +78,9 @@ class _SettingsFormState extends State<SettingsForm> {
                       color: Colors.brown[200],
                       child: Text(
                         'Update',
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.ubuntu(
+                          textStyle: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w600 )
+                        ),
                       ),
                       onPressed: () async {
                         if(_formKey.currentState.validate()){

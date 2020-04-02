@@ -6,6 +6,7 @@ import 'package:ninja/services/auth.dart';
 import 'package:ninja/services/database.dart';
 import 'package:provider/provider.dart';
 import 'brew_list.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatelessWidget {
 
@@ -32,7 +33,9 @@ class Home extends StatelessWidget {
           title: Text(
             "Coffee Crew",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(fontSize: 21.0, fontWeight: FontWeight.w700),
+            ),
           ),
           elevation: 5.0,
           actions: <Widget>[
@@ -40,12 +43,16 @@ class Home extends StatelessWidget {
                 onPressed: () async {
                   await _auth.signOut();
                 },
-                icon: Icon(Icons.person_pin, color: Colors.brown[700],size: 25.0,),
-                label: Text("Logout", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16,color: Colors.brown[800]),),
+                icon: Icon(Icons.person_pin, color: Colors.lightGreenAccent,size: 25.0,),
+              label: Text("Logout",
+                style: GoogleFonts.workSans(textStyle:TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.lightGreenAccent),
+                ),),
             ),
             FlatButton.icon(
-              icon: Icon(Icons.settings, color: Colors.brown[700],size: 25.0,),
-              label: Text('Settings', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16,color: Colors.brown[800]),),
+              icon: Icon(Icons.settings, color: Colors.lightGreenAccent,size: 25.0,),
+              label: Text("Settings",
+                style: GoogleFonts.workSans(textStyle:TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.lightGreenAccent),
+                ),),
               onPressed: () => _showSettingsPanel(),
             )
 
@@ -53,7 +60,15 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.lightBlueAccent[700],
         ),
         backgroundColor: Colors.blue[50],
-          body: BrewList(),
+          body: Container(
+              child: BrewList(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/cb.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+          ),
       ),
     );
   }
