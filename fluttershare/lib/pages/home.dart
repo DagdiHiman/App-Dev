@@ -73,8 +73,10 @@ class _HomeState extends State<Home> {
   }
 
   onTap(int pageIndex) {
-    pageController.jumpToPage(
+    pageController.animateToPage(
         pageIndex,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeIn,
     );
   }
 
@@ -109,16 +111,6 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
-
-//    return RaisedButton(
-//      color: Colors.blue,
-//      elevation: 10.0,
-//      onPressed: logout,
-//      child: Text("LOGOUT",
-//      style: TextStyle(
-//        fontSize: 40.0,),
-//      ),
-//    );
   }
 
   final Shader linearGradient = LinearGradient(

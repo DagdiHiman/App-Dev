@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttershare/widgets/header.dart';
+import 'package:fluttershare/widgets/progress.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -7,7 +9,10 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
-  Widget build(BuildContext context) {
-    return Text("Profile");
+  Scaffold build(BuildContext context) {
+    return Scaffold(
+      appBar: header(titleText : "Profile"),
+      body: linearProgress(),
+    );
   }
 }
