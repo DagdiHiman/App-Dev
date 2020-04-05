@@ -67,7 +67,17 @@ class _SearchState extends State<Search> {
   Container buildNoContent() {
     final Orientation orientation = MediaQuery.of(context).orientation;
     return Container(
-      //color: Colors.purpleAccent,
+      //color: Colors.pink[50],
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Colors.pinkAccent[100],
+            Colors.deepPurpleAccent[100],
+          ],
+        ),
+      ),
       child: Center(
         child: ListView(
           shrinkWrap: true,
@@ -105,9 +115,9 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
-      appBar: buildSearchField(),
-      body: searchResultsFuture == null ? buildNoContent() : buildSearchResults(),
+        backgroundColor: Colors.pink[50],
+        appBar: buildSearchField(),
+        body: searchResultsFuture == null ? buildNoContent() : buildSearchResults(),
     );
   }
 }
