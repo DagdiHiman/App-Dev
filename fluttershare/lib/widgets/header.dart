@@ -5,8 +5,9 @@ final Shader linearGradient = LinearGradient(
   colors: <Color>[Colors.pinkAccent, Colors.purple[300]],
 ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
-AppBar header({bool isAppTitle=false, String titleText}) {
+AppBar header({bool isAppTitle=false, String titleText, removeBackButton = false}) {
   return AppBar(
+    automaticallyImplyLeading: removeBackButton ? true : false,
     centerTitle: true,
     title: Text(
       isAppTitle ? "InstaFlutter" : titleText,
