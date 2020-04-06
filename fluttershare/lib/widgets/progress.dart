@@ -13,7 +13,8 @@ Container circularProgress() {
 
 Container linearProgress() {
   return Container(
-    padding: EdgeInsets.only(bottom: 10.0),
+    //padding: EdgeInsets.only(bottom: 10.0),
+    padding: EdgeInsets.fromLTRB(0, 1, 0, 1),
     child: LinearProgressIndicator(
       valueColor: AlwaysStoppedAnimation(Colors.purpleAccent),
     ),
