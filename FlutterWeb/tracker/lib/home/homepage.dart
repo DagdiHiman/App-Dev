@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:tracker/main.dart';
+class LandingPage extends StatefulWidget {
 
-class LandingPage extends StatelessWidget {
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   List<Widget> pageChildren(double width) {
+
+    // final size = MediaQuery.of(context).size;
+    // double localX = 0;
+    // double localY = 0;
+    // bool defaultPosition = true;
+    // double percentageX = (localX / (size.width - 40)) * 100;
+    // double percentageY = (localY / 230) * 100;
+
     return <Widget>[
       Container(
         width: width,
@@ -35,7 +49,41 @@ class LandingPage extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
               ),
-            )
+            ),
+
+            Text("HIMANSHU", style: TextStyle(color: Colors.white),),
+              
+              // GestureDetector(
+              //   onPanCancel: () => setState(() => defaultPosition = true),
+              //   onPanDown: (_) => setState(() => defaultPosition = false),
+              //   onPanEnd: (_) => setState(() {
+              //     localY = 115;
+              //     localX = (size.width - 40) / 2;
+              //     defaultPosition = true;
+              //   }),
+              //   onPanUpdate: (details) {
+              //     if (mounted) setState(() => defaultPosition = false);
+              //     if (details.localPosition.dx > 0 &&
+              //         details.localPosition.dy < 230) {
+              //       if (details.localPosition.dx < size.width - 40 &&
+              //           details.localPosition.dy > 0) {
+              //         localX = details.localPosition.dx;
+              //         localY = details.localPosition.dy;
+              //       }
+              //     }
+              //   }
+              // ),
+              // Transform(
+              //   transform: Matrix4.identity()
+              //     ..setEntry(3, 2, 0.001)
+              //     ..rotateX(defaultPosition ? 0 : (0.3 * (percentageY / 50) + -0.3))
+              //     ..rotateY(defaultPosition ? 0 : (-0.3 * (percentageX / 50) + 0.3)),
+              //   alignment: FractionalOffset.center,
+              //   child: Container(
+              //     child: Text("Himan",style: TextStyle(color: Colors.white),),
+              //   ), // back layer
+              // ),
+
           ],
         ),
       ),
