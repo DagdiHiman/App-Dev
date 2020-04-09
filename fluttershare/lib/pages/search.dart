@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/home.dart';
+import 'package:fluttershare/pages/profile.dart';
 import 'package:fluttershare/widgets/progress.dart';
 
 class Search extends StatefulWidget {
@@ -133,7 +134,7 @@ class UserResult extends StatelessWidget {
       color: Colors.redAccent[100],
       child: Column(children: <Widget>[
         GestureDetector(
-          onTap: () { print("tapped");  },
+          onTap: () => showProfile(context, profileId: user.id),
           child:  ListTile(
             leading: CircleAvatar(
               backgroundColor : Colors.lightBlue,
@@ -151,4 +152,15 @@ class UserResult extends StatelessWidget {
 
     );
   }
+}
+
+showProfile(BuildContext context, {String profileId}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Profile(
+        profileId: profileId,
+      ),
+    ),
+  );
 }

@@ -5,6 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
+import 'package:fluttershare/pages/comments.dart';
+import 'package:fluttershare/pages/profile.dart';
 import 'package:fluttershare/widgets/custom_image.dart';
 import 'package:fluttershare/widgets/progress.dart';
 import 'package:fluttershare/pages/home.dart';
@@ -107,7 +109,7 @@ class _PostState extends State<Post> {
             backgroundColor: Colors.grey,
           ),
           title: GestureDetector(
-            onTap: () => print('showing profile'),
+            onTap: () => showProfile(context, profileId: user.id),
             child: Text(
               user.username,
               style: TextStyle(
@@ -133,7 +135,7 @@ class _PostState extends State<Post> {
         .collection('userPosts')
         .document(postId)
         .updateData({ 'likes.$currentUserId' : false });
-
+     removeLikeFromActivityFeed();
      setState(() {
        likeCount -= 1;
        isLiked = false;
@@ -144,7 +146,7 @@ class _PostState extends State<Post> {
          .collection('userPosts')
          .document(postId)
          .updateData({ 'likes.$currentUserId' : true });
-
+     addLikeToActivityFeed();
      setState(() {
        likeCount += 1;
        isLiked = true;
@@ -157,6 +159,41 @@ class _PostState extends State<Post> {
        });
     });
    }
+  }
+
+  removeLikeFromActivityFeed() {
+    bool isNotPostOwner = currentUserId != ownerId;
+    if(isNotPostOwner) {
+      activityFeedRef
+          .document(ownerId)
+          .collection("feed")
+          .document(postId)
+          .get().then((doc) {
+        if (doc.exists) {
+          doc.reference.delete();
+        }
+      });
+    }
+  }
+
+  addLikeToActivityFeed() {
+
+    bool isNotPostOwner = currentUserId != ownerId;
+    if(isNotPostOwner){
+    activityFeedRef
+        .document(ownerId)
+        .collection("feed")
+        .document(postId)
+        .setData({
+          "type" : "like",
+          "username" : currentUser.username,
+          "userId" : currentUser.id,
+          "postId" : postId,
+          "mediaUrl" : mediaUrl,
+          "userProfileImg" : currentUser.photoUrl,
+          "timestamp" : timestamp,
+        });
+    }
   }
 
   buildPostImage() {
@@ -200,7 +237,12 @@ class _PostState extends State<Post> {
             ),
             Padding(padding: EdgeInsets.only(right: 20.0)),
             GestureDetector(
-              onTap: () => print('showing comments'),
+              onTap: () => showComments(
+                  context,
+                  postId: postId,
+                  ownerId: ownerId,
+                  mediaUrl: mediaUrl,
+                ),
               child: Icon(
                 Icons.chat,
                 size: 28.0,
@@ -257,4 +299,26 @@ class _PostState extends State<Post> {
       ],
     );
   }
+}
+
+showComments(BuildContext context,
+    {String postId, String ownerId, String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(
+      postId: postId,
+      postOwnerId: ownerId,
+      postMediaUrl: mediaUrl,
+    );
+  }));
+}
+
+showProfile(BuildContext context, {String profileId}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Profile(
+        profileId: profileId,
+      ),
+    ),
+  );
 }
