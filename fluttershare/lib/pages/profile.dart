@@ -28,11 +28,47 @@ class _ProfileState extends State<Profile> {
   int postCount = 0;
   List<Post> posts = [];
   String postOrientation = "grid";
+  bool isFollowing = false;
+  int followerCount = 0;
+  int followingCount = 0;
 
   @override
   initState() {
     super.initState();
     getProfilePosts();
+    getFollowers();
+    getFollowing();
+    checkIfFollowing();
+  }
+  checkIfFollowing() async {
+    DocumentSnapshot doc = await followersRef
+        .document(widget.profileId)
+        .collection('userFollowers')
+        .document(currentUserId)
+        .get();
+    setState(() {
+      isFollowing = doc.exists;
+    });
+  }
+
+  getFollowers() async {
+    QuerySnapshot snapshot = await followersRef
+        .document(widget.profileId)
+        .collection('userFollowers')
+        .getDocuments();
+    setState(() {
+      followerCount = snapshot.documents.length;
+    });
+  }
+
+  getFollowing() async {
+    QuerySnapshot snapshot = await followersRef
+        .document(widget.profileId)
+        .collection('userFollowing')
+        .getDocuments();
+    setState(() {
+      followingCount = snapshot.documents.length;
+    });
   }
 
   getProfilePosts() async {
@@ -87,6 +123,7 @@ class _ProfileState extends State<Profile> {
     return Container(
       padding: EdgeInsets.only(top: 2.0),
       child: FlatButton(
+        splashColor: Colors.purpleAccent[100],
         onPressed: function,
         child: Container(
           width: 230.0,
@@ -94,16 +131,16 @@ class _ProfileState extends State<Profile> {
           child: Text(
             text,
             style: TextStyle(
-              color: Colors.white,
+              color: isFollowing ? Colors.black : Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
           ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.pinkAccent,
+            color: isFollowing ? Colors.white :Colors.pinkAccent,
             border: Border.all(
-              color: Colors.pink[900],
+              color: isFollowing? Colors.black :Colors.pink[900],
             ),
             borderRadius: BorderRadius.circular(5.0),
           ),
@@ -121,9 +158,61 @@ class _ProfileState extends State<Profile> {
         function: editProfile,
       );
     }
-    else{
-      return Text('Follow');
+    else if (isFollowing) {
+      return buildButton(text: 'Unfollow', function: handleUnfollowUser);
     }
+    else if (! isFollowing) {
+      return buildButton(text: 'Follow', function: handleFollowUser);
+    }
+  }
+
+  handleUnfollowUser() {
+    setState(() {
+      isFollowing = false;
+    });
+    followersRef
+        .document(widget.profileId)
+        .collection('userFollowers')
+        .document(currentUserId)
+        .delete();
+    followingRef
+        .document(currentUserId)
+        .collection('userFollowing')
+        .document(widget.profileId)
+        .delete();
+    activityFeedRef
+        .document(widget.profileId)
+        .collection('feedItems')
+        .document(currentUserId)
+        .delete();
+  }
+
+  handleFollowUser() {
+    setState(() {
+      isFollowing = true;
+    });
+    followersRef
+      .document(widget.profileId)
+      .collection('userFollowers')
+      .document(currentUserId)
+      .setData({ });
+    followingRef
+      .document(currentUserId)
+      .collection('userFollowing')
+      .document(widget.profileId)
+      .setData({ });
+    activityFeedRef
+      .document(widget.profileId)
+      .collection('feedItems')
+      .document(currentUserId)
+      .setData({
+        'type' : 'follow',
+        'ownerId' : widget.profileId,
+        'username' : currentUser.username,
+        'userId' : currentUserId,
+        'userProfileImg' : currentUser.photoUrl,
+        'timestamp' : timestamp,
+    });
   }
 
   buildProfileHeader() {
@@ -155,8 +244,8 @@ class _ProfileState extends State<Profile> {
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             buildCountColumn("Posts", postCount),
-                            buildCountColumn("Followers", 0),
-                            buildCountColumn("Following", 0),
+                            buildCountColumn("Followers", followerCount),
+                            buildCountColumn("Following", followingCount),
                           ],
                         ),
                         Row(

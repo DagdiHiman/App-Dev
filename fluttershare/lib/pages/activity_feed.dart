@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttershare/pages/home.dart';
 import 'package:fluttershare/pages/post_screen.dart';
 import 'package:fluttershare/pages/profile.dart';
+import 'package:fluttershare/pages/search.dart';
 import 'package:fluttershare/widgets/header.dart';
 import 'package:fluttershare/widgets/progress.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -67,7 +68,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
 Widget mediaPreview;
 String activityItemText;
 
-class ActivityFeedItem extends StatelessWidget {
+class ActivityFeedItem extends StatefulWidget {
   final String username;
   final String userId;
   final String type; // 'like', 'follow', 'comment'
@@ -101,14 +102,20 @@ class ActivityFeedItem extends StatelessWidget {
     );
   }
 
+  @override
+  _ActivityFeedItemState createState() => _ActivityFeedItemState();
+}
+
+class _ActivityFeedItemState extends State<ActivityFeedItem> {
   showPost(context) {
-   Navigator.push(context, MaterialPageRoute(
-     builder: (context) => PostScreen(postId: postId, userId: userId,)
-   ));
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) =>
+            PostScreen(postId: widget.postId, userId: widget.userId,)
+    ));
   }
 
   configureMediaPreview(context) {
-    if (type == "like" || type == 'comment') {
+    if (widget.type == "like" || widget.type == 'comment') {
       mediaPreview = GestureDetector(
         onTap: () => showPost(context),
         child: Container(
@@ -120,7 +127,7 @@ class ActivityFeedItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(mediaUrl),
+                    image: CachedNetworkImageProvider(widget.mediaUrl),
                   ),
                 ),
               )),
@@ -130,14 +137,14 @@ class ActivityFeedItem extends StatelessWidget {
       mediaPreview = Text('');
     }
 
-    if (type == 'like') {
+    if (widget.type == 'like') {
       activityItemText = "liked your post";
-    } else if (type == 'follow') {
+    } else if (widget.type == 'follow') {
       activityItemText = "is following you";
-    } else if (type == 'comment') {
-      activityItemText = 'replied: $commentData';
+    } else if (widget.type == 'comment') {
+      activityItemText = 'replied: ${widget.commentData}';
     } else {
-      activityItemText = "Error: Unknown type '$type'";
+      activityItemText = "Error: Unknown type '${widget.type}'";
     }
   }
 
@@ -147,51 +154,43 @@ class ActivityFeedItem extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: 2.0),
-      child: Container(
-        color: Colors.white54,
-        child: ListTile(
-          title: GestureDetector(
-            onTap: () => showProfile(context, profileId: userId),
-            child: RichText(
-              overflow: TextOverflow.ellipsis,
-              text: TextSpan(
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.black,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: username,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+      child: GestureDetector(
+        child: Container(
+          color: Colors.white54,
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showProfile(context, profileId: widget.userId),
+              child: RichText(
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black,
                     ),
-                    TextSpan(
-                      text: ' $activityItemText',
-                    ),
-                  ]),
+                    children: [
+                      TextSpan(
+                        text: widget.username,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: ' $activityItemText',
+                      ),
+                    ]),
+              ),
             ),
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                  widget.userProfileImg),
+            ),
+            subtitle: Text(
+              timeago.format(widget.timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+            ),
+            trailing: mediaPreview,
           ),
-          leading: CircleAvatar(
-            backgroundImage: CachedNetworkImageProvider(userProfileImg),
-          ),
-          subtitle: Text(
-            timeago.format(timestamp.toDate()),
-            overflow: TextOverflow.ellipsis,
-          ),
-          trailing: mediaPreview,
+
         ),
       ),
     );
   }
-}
-
-
-showProfile(BuildContext context, {String profileId}) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Profile(
-        profileId: profileId,
-      ),
-    ),
-  );
 }
