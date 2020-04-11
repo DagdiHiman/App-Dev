@@ -15,7 +15,8 @@ class Search extends StatefulWidget {
 
 
 
-class _SearchState extends State<Search> {
+class _SearchState extends State<Search> with
+  AutomaticKeepAliveClientMixin<Search> {
 
   Future<QuerySnapshot> searchResultsFuture;
   TextEditingController searchController = TextEditingController();
@@ -113,8 +114,11 @@ class _SearchState extends State<Search> {
     );
   }
 
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         backgroundColor: Colors.pink[50],
         appBar: buildSearchField(),
