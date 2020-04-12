@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
               "InstaFlutter",
               style: new TextStyle(
                 fontFamily: "Signatra",
-                fontSize: 97.0,
+                fontSize: 80.0,
                 foreground: Paint()..shader = linearGradient,
               ),
             ),
