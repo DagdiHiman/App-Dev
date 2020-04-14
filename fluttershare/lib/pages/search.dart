@@ -159,6 +159,25 @@ class UserResult extends StatelessWidget {
 }
 
 showProfile(BuildContext context, {String profileId}) {
+  print('+1 profile view');
+//  postRef
+//      .document(widget.currentUser.id)
+//      .collection('userPosts')
+//      .document(postId)
+
+//
+//  var pcountRef = postRef
+//      .document(currentUser.id)
+//      .collection('userPosts')
+//      .document();
+//
+//  pcountRef.update("pcount", FieldValue.increment(50));
+
+  DocumentReference washingtonRef = db.collection("cities").document("DC");
+
+// Atomically increment the population of the city by 50.
+  washingtonRef.update("population", FieldValue.increment(50));
+
   Navigator.push(
     context,
     MaterialPageRoute(

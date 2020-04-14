@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:animator/animator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/comments.dart';
 import 'package:fluttershare/pages/profile.dart';
+import 'package:fluttershare/pages/settings_form.dart';
 import 'package:fluttershare/widgets/custom_image.dart';
 import 'package:fluttershare/widgets/progress.dart';
 import 'package:fluttershare/pages/home.dart';
@@ -282,35 +282,58 @@ class _PostState extends State<Post> {
     );
   }
 
+  void _showSettingsPanel() {
+    showModalBottomSheet(context: context, builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+        child: SettingsForm(),
+      );
+    });
+  }
+
   buildPostFooter() {
     return Column(
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-            GestureDetector(
-              onTap: handleLikePost,
-              child: Icon(
-                isLiked ? Icons.favorite :Icons.favorite_border,
-                size: 28.0,
-                color: Colors.pink,
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(right: 20.0)),
-            GestureDetector(
-              onTap: () => showComments(
-                  context,
-                  postId: postId,
-                  ownerId: ownerId,
-                  mediaUrl: mediaUrl,
+            Row(
+             children : <Widget>[
+                Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                GestureDetector(
+                  onTap: handleLikePost,
+                  child: Icon(
+                    isLiked ? Icons.favorite :Icons.favorite_border,
+                    size: 28.0,
+                    color: Colors.pink,
+                  ),
                 ),
-              child: Icon(
-                Icons.chat,
-                size: 28.0,
-                color: Colors.blue[900],
-              ),
-            ),
+                Padding(padding: EdgeInsets.only(right: 20.0)),
+                GestureDetector(
+                  onTap: () => showComments(
+                      context,
+                      postId: postId,
+                      ownerId: ownerId,
+                      mediaUrl: mediaUrl,
+                    ),
+                  child: Icon(
+                    Icons.chat,
+                    size: 28.0,
+                    color: Colors.blue[900],
+                  ),
+                ),
+            ]),
+            currentUserId == ownerId ? Row(
+              children: <Widget>[
+                FlatButton.icon(
+                  icon: Icon(Icons.graphic_eq, color: Colors.black,size: 25.0,),
+                  label: Text("Insights",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18,color: Colors.black),
+                  ),
+                  onPressed: () => _showSettingsPanel(),
+                ),
+              ],
+            ) : Text(''),
           ],
         ),
         Row(
@@ -375,6 +398,7 @@ showComments(BuildContext context,
 }
 
 showProfile(BuildContext context, {String profileId}) {
+  print('+1 profile view');
   Navigator.push(
     context,
     MaterialPageRoute(
