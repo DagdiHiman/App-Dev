@@ -158,25 +158,53 @@ class UserResult extends StatelessWidget {
   }
 }
 
-showProfile(BuildContext context, {String profileId}) {
-  print('+1 profile view');
-//  postRef
-//      .document(widget.currentUser.id)
-//      .collection('userPosts')
-//      .document(postId)
+showProfile(BuildContext context, {String profileId}) async {
+  print('+2 profile view');
+  print(profileId);
+  print('DONE');
+  print('Getting');
+  Firestore.instance
+      .collection("posts")
+      .document(profileId)
+      .collection("userPosts")
+      .document('a605cfdb-2bfc-4a7a-a065-4268079f5b8b')
+      .get()
+      .then((DocumentSnapshot ds) {
 
-//
-//  var pcountRef = postRef
-//      .document(currentUser.id)
-//      .collection('userPosts')
-//      .document();
-//
-//  pcountRef.update("pcount", FieldValue.increment(50));
+    if (ds["pcount"].exists) {
+      // do something with the data
+      print('Values from db: $ds.data()');
+    } else {
+      print('document not found');
+    }
 
-  DocumentReference washingtonRef = db.collection("cities").document("DC");
+    // use ds as a snapshot
+    //ds.forEach((f) => print('${f.data}}'));
 
-// Atomically increment the population of the city by 50.
-  washingtonRef.update("population", FieldValue.increment(50));
+  });
+//  Firestore.instance
+//      .collection("posts")
+//      .document(profileId)
+//      .collection("userPosts")
+//      .document('a605cfdb-2bfc-4a7a-a065-4268079f5b8b')
+//      .get()
+//      .then((QuerySnapshot snapshot) {
+//    snapshot.documents.forEach((f) => print('${f.data}}'));
+//  });
+  print('DONE');
+
+//  DocumentSnapshot doc = await Firestore.instance.document
+//  ('posts/$profileId/userPosts/a605cfdb-2bfc-4a7a-a065-4268079f5b8b').get();
+//  print(doc('pcount'));
+
+//  Firestore.instance.
+//      collection('posts').
+//      document(profileId).
+//      collection('userPosts').
+//      document(postId).
+//      updateData({
+//        'profileCount': FieldValue.increment(1),
+//      });
 
   Navigator.push(
     context,

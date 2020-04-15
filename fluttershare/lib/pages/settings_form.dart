@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttershare/pages/profileVisits.dart';
 
 class SettingsForm extends StatefulWidget {
   @override
@@ -57,33 +58,20 @@ class _SettingsFormState extends State<SettingsForm> {
               ],
             ),
           ),
-          SizedBox(height: 20.0,),
-          Container(
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  Icons.remove_red_eye,
-                  color: Colors.deepPurple,
-                  size: 30.0,
+          SizedBox(height: 0.0,),
+          Row(
+            children: <Widget>[
+              RaisedButton.icon(
+                icon: Icon(Icons.remove_red_eye, color: Colors.black,size: 25.0,),
+                label: Text("who visited ur profile",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15,color: Colors.black),
                 ),
-                SizedBox(width: 10.0,),
-                Text(
-                  'Total post views :',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
-                ),
-                SizedBox(width: 10.0,),
-                Text(
-                  '123',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
-                ),
-              ],
-            ),
+                onPressed: () => _showSettingsPanel(),
+              ),
+            ],
           ),
-          SizedBox(height: 20.0,),
+          SizedBox(height: 10.0,),
+
           Container(
             child: Row(
               children: <Widget>[
@@ -94,9 +82,9 @@ class _SettingsFormState extends State<SettingsForm> {
                 ),
                 SizedBox(width: 10.0,),
                 Text(
-                  'Distinct post views :',
+                  'Post views :',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                   ),
                 ),
                 SizedBox(width: 10.0,),
@@ -110,6 +98,7 @@ class _SettingsFormState extends State<SettingsForm> {
             ),
           ),
           SizedBox(height: 40.0,),
+
           Icon(
             Icons.graphic_eq,
             color: Colors.blue[900],
@@ -119,5 +108,14 @@ class _SettingsFormState extends State<SettingsForm> {
         ],
       ),
     );
+
+  }
+  void _showSettingsPanel() {
+    showModalBottomSheet(context: context, builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+        child: ProfileVisits(),
+      );
+    });
   }
 }

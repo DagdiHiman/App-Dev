@@ -155,7 +155,8 @@ class _UploadState extends State<Upload> with
           'location' : location,
           'timestamp' : timestamp,
           'likes' : {},
-          'pcount' : 0,
+          'pcount' : {},
+          'profileCount' : 0,
         });
   }
 

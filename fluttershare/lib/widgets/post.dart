@@ -19,6 +19,7 @@ class Post extends StatefulWidget {
   final String description;
   final String mediaUrl;
   final dynamic likes;
+  final dynamic pcount;
 
   Post({
     this.postId,
@@ -28,6 +29,7 @@ class Post extends StatefulWidget {
     this.description,
     this.mediaUrl,
     this.likes,
+    this.pcount,
   });
 
   factory Post.fromDocument(DocumentSnapshot doc) {
@@ -39,6 +41,7 @@ class Post extends StatefulWidget {
       description: doc['description'],
       mediaUrl: doc['mediaUrl'],
       likes: doc['likes'],
+      pcount: doc['pcount'],
     );
   }
 
@@ -57,6 +60,32 @@ class Post extends StatefulWidget {
     return count;
   }
 
+  int getPCount(pcount) {
+    // if no pcount, return 0
+    if (pcount == null) {
+      return 0;
+    }
+    int count = 0;
+    // if the key is explicitly set to true, add a like
+    pcount.values.forEach((val) {
+      if (val == true) {
+        count += 1;
+      }
+    });
+    return count;
+  }
+
+  getProfileCount() async{
+//    int count;
+//    DocumentSnapshot doc = await postRef.document(ownerId)
+//        .collection('userPosts')
+//        .document(postId)
+//        .get();
+//    count = doc['profileCount'];
+//    return count;
+
+  }
+
   @override
   _PostState createState() => _PostState(
     postId: this.postId,
@@ -67,6 +96,9 @@ class Post extends StatefulWidget {
     mediaUrl: this.mediaUrl,
     likes: this.likes,
     likeCount: getLikeCount(this.likes),
+    pcount : this.pcount,
+    newPCount : getPCount(this.pcount),
+    //profileCount: getProfileCount(),
   );
 }
 
@@ -80,7 +112,10 @@ class _PostState extends State<Post> {
   final String description;
   final String mediaUrl;
   int likeCount;
+  int newPCount;
+  //int profileCount;
   Map likes;
+  Map pcount;
   bool isLiked;
   bool showHeart = false;
 
@@ -93,6 +128,9 @@ class _PostState extends State<Post> {
     this.mediaUrl,
     this.likes,
     this.likeCount,
+    this.pcount,
+    this.newPCount,
+    //this.profileCount,
   });
 
   buildPostHeader() {
@@ -131,46 +169,46 @@ class _PostState extends State<Post> {
 
   handleDeletePost(BuildContext parentContext) {
     return showDialog(
-      context: parentContext,
-      builder: (context) {
-        return SimpleDialog(title: Text(
-          "remove this post ..?"
+        context: parentContext,
+        builder: (context) {
+          return SimpleDialog(title: Text(
+              "remove this post ..?"
           ),
-          children: <Widget>[
-            SimpleDialogOption(
-              onPressed: () {Navigator.pop(context);
-                    deletePost();
-              },
-              child: Text('Delete', style: TextStyle(color: Colors.red),),
-            ),
-            SimpleDialogOption(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Cancel', style: TextStyle(color: Colors.grey),),
-            )
-          ],
-        );
-      }
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {Navigator.pop(context);
+                deletePost();
+                },
+                child: Text('Delete', style: TextStyle(color: Colors.red),),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Cancel', style: TextStyle(color: Colors.grey),),
+              )
+            ],
+          );
+        }
     );
   }
 
   deletePost() async {
     postRef
-      .document(ownerId)
+        .document(ownerId)
         .collection('userPosts')
         .document(postId)
         .get().then((doc) {
-          if(doc.exists) {
-            doc.reference.delete();
-          }
+      if(doc.exists) {
+        doc.reference.delete();
+      }
     });
 
     storageRef.child("post_$postId.jpg").delete();
 
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-      .document(ownerId)
-      .collection('feedItems')
-      .where('postId', isEqualTo: postId)
-      .getDocuments();
+        .document(ownerId)
+        .collection('feedItems')
+        .where('postId', isEqualTo: postId)
+        .getDocuments();
 
     activityFeedSnapshot.documents.forEach((doc) {
       if(doc.exists){
@@ -179,9 +217,9 @@ class _PostState extends State<Post> {
     });
 
     QuerySnapshot commentSnapshot = await commentsRef
-      .document(postId)
-      .collection('comments')
-      .getDocuments();
+        .document(postId)
+        .collection('comments')
+        .getDocuments();
 
     commentSnapshot.documents.forEach((doc) {
       if(doc.exists){
@@ -191,36 +229,36 @@ class _PostState extends State<Post> {
   }
 
   handleLikePost() {
-   bool _isLiked = likes[currentUserId] == true;
-   if(_isLiked) {
-     postRef.document(ownerId)
-        .collection('userPosts')
-        .document(postId)
-        .updateData({ 'likes.$currentUserId' : false });
-     removeLikeFromActivityFeed();
-     setState(() {
-       likeCount -= 1;
-       isLiked = false;
-       likes[currentUserId] = false;
-     });
-   } else if (!_isLiked){
-     postRef.document(ownerId)
-         .collection('userPosts')
-         .document(postId)
-         .updateData({ 'likes.$currentUserId' : true });
-     addLikeToActivityFeed();
-     setState(() {
-       likeCount += 1;
-       isLiked = true;
-       likes[currentUserId] = true;
-       showHeart = true;
-     });
-     Timer(Duration(milliseconds: 500),() {
-       setState(() {
-         showHeart = false;
-       });
-    });
-   }
+    bool _isLiked = likes[currentUserId] == true;
+    if(_isLiked) {
+      postRef.document(ownerId)
+          .collection('userPosts')
+          .document(postId)
+          .updateData({ 'likes.$currentUserId' : false });
+      removeLikeFromActivityFeed();
+      setState(() {
+        likeCount -= 1;
+        isLiked = false;
+        likes[currentUserId] = false;
+      });
+    } else if (!_isLiked){
+      postRef.document(ownerId)
+          .collection('userPosts')
+          .document(postId)
+          .updateData({ 'likes.$currentUserId' : true });
+      addLikeToActivityFeed();
+      setState(() {
+        likeCount += 1;
+        isLiked = true;
+        likes[currentUserId] = true;
+        showHeart = true;
+      });
+      Timer(Duration(milliseconds: 500),() {
+        setState(() {
+          showHeart = false;
+        });
+      });
+    }
   }
 
   removeLikeFromActivityFeed() {
@@ -242,19 +280,19 @@ class _PostState extends State<Post> {
 
     bool isNotPostOwner = currentUserId != ownerId;
     if(isNotPostOwner){
-    activityFeedRef
-        .document(ownerId)
-        .collection("feed")
-        .document(postId)
-        .setData({
-          "type" : "like",
-          "username" : currentUser.username,
-          "userId" : currentUser.id,
-          "postId" : postId,
-          "mediaUrl" : mediaUrl,
-          "userProfileImg" : currentUser.photoUrl,
-          "timestamp" : timestamp,
-        });
+      activityFeedRef
+          .document(ownerId)
+          .collection("feed")
+          .document(postId)
+          .setData({
+        "type" : "like",
+        "username" : currentUser.username,
+        "userId" : currentUser.id,
+        "postId" : postId,
+        "mediaUrl" : mediaUrl,
+        "userProfileImg" : currentUser.photoUrl,
+        "timestamp" : timestamp,
+      });
     }
   }
 
@@ -298,31 +336,31 @@ class _PostState extends State<Post> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
-             children : <Widget>[
-                Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                GestureDetector(
-                  onTap: handleLikePost,
-                  child: Icon(
-                    isLiked ? Icons.favorite :Icons.favorite_border,
-                    size: 28.0,
-                    color: Colors.pink,
+                children : <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                  GestureDetector(
+                    onTap: handleLikePost,
+                    child: Icon(
+                      isLiked ? Icons.favorite :Icons.favorite_border,
+                      size: 28.0,
+                      color: Colors.pink,
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(right: 20.0)),
-                GestureDetector(
-                  onTap: () => showComments(
+                  Padding(padding: EdgeInsets.only(right: 20.0)),
+                  GestureDetector(
+                    onTap: () => showComments(
                       context,
                       postId: postId,
                       ownerId: ownerId,
                       mediaUrl: mediaUrl,
                     ),
-                  child: Icon(
-                    Icons.chat,
-                    size: 28.0,
-                    color: Colors.blue[900],
+                    child: Icon(
+                      Icons.chat,
+                      size: 28.0,
+                      color: Colors.blue[900],
+                    ),
                   ),
-                ),
-            ]),
+                ]),
             currentUserId == ownerId ? Row(
               children: <Widget>[
                 FlatButton.icon(
@@ -370,6 +408,47 @@ class _PostState extends State<Post> {
     );
   }
 
+
+  showProfile(BuildContext context, {String profileId}) async {
+    print('+1 profile view');
+    print(profileId);
+    print(ownerId);
+    print(currentUserId);
+    print(currentUser.id);
+    print(postId);
+    print(timestamp);
+    print('-1');
+    postRef.document(ownerId)
+        .collection('userPosts')
+        .document(postId)
+        .updateData({ 'pcount.$currentUserId' : timestamp });
+
+//    DocumentSnapshot doc = await postRef.document(ownerId)
+//        .collection('userPosts')
+//        .document(postId)
+//        .get();
+//    print("$doc['profileCount']");
+
+
+    setState(() {
+      //profileCount += 1;
+    });
+    postRef.document(ownerId)
+        .collection('userPosts')
+        .document(postId)
+        .updateData({ 'profileCount' : 1 });
+
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Profile(
+          profileId: profileId,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -395,16 +474,4 @@ showComments(BuildContext context,
       postMediaUrl: mediaUrl,
     );
   }));
-}
-
-showProfile(BuildContext context, {String profileId}) {
-  print('+1 profile view');
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Profile(
-        profileId: profileId,
-      ),
-    ),
-  );
 }
