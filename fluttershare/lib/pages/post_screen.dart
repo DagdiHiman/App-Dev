@@ -12,6 +12,7 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder(
       future: postRef
           .document(userId)
@@ -35,7 +36,16 @@ class PostScreen extends StatelessWidget {
             ),
           ),
         );
-      },
+          },
     );
+
+
+
   }
+  //Future<String> profilecounts() as
 }
+
+
+
+
+

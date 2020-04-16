@@ -47,9 +47,14 @@ flutter {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
+    //noinspection GradleDependency
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    //noinspection GradleDependency
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
 }
 apply plugin: 'com.google.gms.google-services'
+
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

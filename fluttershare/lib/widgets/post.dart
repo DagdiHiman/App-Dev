@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:animator/animator.dart';
+//import 'package:animator/animator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -76,13 +76,13 @@ class Post extends StatefulWidget {
   }
 
   getProfileCount() async{
-//    int count;
-//    DocumentSnapshot doc = await postRef.document(ownerId)
-//        .collection('userPosts')
-//        .document(postId)
-//        .get();
-//    count = doc['profileCount'];
-//    return count;
+    int count;
+    DocumentSnapshot doc = await postRef.document(ownerId)
+        .collection('userPosts')
+        .document(postId)
+        .get();
+    count = doc['profileCount'];
+    return count;
 
   }
 
@@ -306,15 +306,17 @@ class _PostState extends State<Post> {
           cachedNetworkImage(mediaUrl),
 
           showHeart ?
-          Animator(
-            duration: Duration(milliseconds: 300),
-            tween: Tween(begin: 0.8, end: 1.6),
-            curve: Curves.bounceOut,
-            cycles: 0,
-            builder: (anim) => Transform.scale(scale: anim.value,
-              child: Icon(Icons.favorite, size: 80.0, color: Colors.red[700],),
-            ) ,
-          ) : Text(""),
+          Icon(Icons.favorite, size: 80.0, color: Colors.red[700],)
+//          Animator(
+//            duration: Duration(milliseconds: 300),
+//            tween: Tween(begin: 0.8, end: 1.6),
+//            curve: Curves.bounceOut,
+//            cycles: 0,
+//            builder: (anim) => Transform.scale(scale: anim.value,
+//              child: Icon(Icons.favorite, size: 80.0, color: Colors.red[700],),
+//            ) ,
+//          )
+        : Text(""),
         ],
       ),
     );
@@ -324,7 +326,7 @@ class _PostState extends State<Post> {
     showModalBottomSheet(context: context, builder: (context) {
       return Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-        child: SettingsForm(),
+        child: SettingsForm(userId),
       );
     });
   }
@@ -429,14 +431,22 @@ class _PostState extends State<Post> {
 //        .get();
 //    print("$doc['profileCount']");
 
+      Firestore.instance.
+      collection('posts').
+      document(profileId).
+      collection('userPosts').
+      document(postId).
+      updateData({
+        'profileCount': FieldValue.increment(1),
+      });
 
-    setState(() {
-      //profileCount += 1;
-    });
-    postRef.document(ownerId)
-        .collection('userPosts')
-        .document(postId)
-        .updateData({ 'profileCount' : 1 });
+//    setState(() {
+//      //profileCount += 1;
+//    });
+//    postRef.document(ownerId)
+//        .collection('userPosts')
+//        .document(postId)
+//        .updateData({ 'profileCount' : 1 });
 
 
     Navigator.push(

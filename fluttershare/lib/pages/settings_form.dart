@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:fluttershare/pages/profileVisits.dart';
 
-class SettingsForm extends StatefulWidget {
-  @override
-  _SettingsFormState createState() => _SettingsFormState();
-}
 
-class _SettingsFormState extends State<SettingsForm> {
+class SettingsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+
+
+//class SettingsForm extends StatefulWidget {
+//  @override
+//  _SettingsFormState createState() => _SettingsFormState();
+//}
+//
+//class _SettingsFormState extends State<SettingsForm> {
+//  @override
+//  
+//}
+
+
+/*
+
+Widget build(BuildContext context) {
     return Container(
        height: MediaQuery.of(context).size.height,
 //      width: MediaQuery.of(context).size.width,
@@ -118,4 +134,5 @@ class _SettingsFormState extends State<SettingsForm> {
       );
     });
   }
-}
+
+ */
