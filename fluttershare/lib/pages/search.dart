@@ -177,34 +177,7 @@ showProfile(BuildContext context, {String profileId}) async {
     } else {
       print('document not found');
     }
-
-    // use ds as a snapshot
-    //ds.forEach((f) => print('${f.data}}'));
-
   });
-//  Firestore.instance
-//      .collection("posts")
-//      .document(profileId)
-//      .collection("userPosts")
-//      .document('a605cfdb-2bfc-4a7a-a065-4268079f5b8b')
-//      .get()
-//      .then((QuerySnapshot snapshot) {
-//    snapshot.documents.forEach((f) => print('${f.data}}'));
-//  });
-  print('DONE');
-
-//  DocumentSnapshot doc = await Firestore.instance.document
-//  ('posts/$profileId/userPosts/a605cfdb-2bfc-4a7a-a065-4268079f5b8b').get();
-//  print(doc('pcount'));
-
-//  Firestore.instance.
-//      collection('posts').
-//      document(profileId).
-//      collection('userPosts').
-//      document(postId).
-//      updateData({
-//        'profileCount': FieldValue.increment(1),
-//      });
 
   Navigator.push(
     context,

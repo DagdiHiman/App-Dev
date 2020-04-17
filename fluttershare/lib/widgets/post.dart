@@ -325,8 +325,8 @@ class _PostState extends State<Post> {
   void _showSettingsPanel() {
     showModalBottomSheet(context: context, builder: (context) {
       return Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-        child: SettingsForm(userId),
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 24.0),
+        child: SettingsForm(userId: currentUserId, postId: postId,),
       );
     });
   }
@@ -417,13 +417,17 @@ class _PostState extends State<Post> {
     print(ownerId);
     print(currentUserId);
     print(currentUser.id);
+    print(currentUser.displayName);
     print(postId);
     print(timestamp);
+    String cudn = currentUser.displayName;
+    print(cudn);
     print('-1');
+
     postRef.document(ownerId)
         .collection('userPosts')
         .document(postId)
-        .updateData({ 'pcount.$currentUserId' : timestamp });
+        .updateData({ 'pcount.$cudn' : timestamp });
 
 //    DocumentSnapshot doc = await postRef.document(ownerId)
 //        .collection('userPosts')
