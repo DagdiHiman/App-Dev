@@ -1,15 +1,14 @@
 FLUTTER :
 ---------
 
-=> StreamBuilder
+=> StreamBuilder / FutureBuilder
 => MediaQuery
 => Material
 => Hero
-=>flutter_upi
+=> flutter_upi
 => transaction
 => onchanged vs controller
-=> stream builder/ future builder
 => streams -> provider -> state mgmt in Flutter
 => BottomSheets
-
+=> mobx/bloc/redux and provider
 
