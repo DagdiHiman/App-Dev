@@ -71,7 +71,7 @@ class ProfileVisits extends StatelessWidget {
           return Center(
             child: Scaffold(
               appBar: header( titleText: 'Latest Visits ToProfile' ,removeBackButton: true),
-              body: ListView(
+              body: Column(
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
@@ -139,7 +139,129 @@ class ProfileVisits extends StatelessWidget {
                         },
                       ),
                   ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RaisedButton.icon(
+                              color: Colors.black,
+                              elevation: 7.0,
+                              onPressed: () {},
+                              icon: Icon(Icons.delete_forever, color: Colors.red, size: 30.0,),
+                              label: Text('RESET',
+                                style: TextStyle(color: Colors.red, fontSize: 19.0),
+                              )
+                          )
+                      ),
+                    ),
+                  ),
 
+
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// For Post Views , this is similar to profileVisits class
+
+class PostVisits extends StatelessWidget {
+
+  final String userId;
+  final String postId;
+  String name;
+  int timestamp;
+
+  PostVisits({this.userId, this.postId, this.name, this.timestamp });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [BoxShadow(
+            color: Colors.pink,
+            offset: Offset(9,9),
+            blurRadius: 4.0,
+          )]
+      ),
+      child: StreamBuilder(
+        stream: postRef
+            .document(userId)
+            .collection('userPosts')
+            .document(postId)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+
+          Map<String,dynamic> myMap = Map.from( snapshot.data['post_views'] );
+
+          return Center(
+            child: Scaffold(
+              appBar: header( titleText: 'Post Views' ,removeBackButton: true),
+              body: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.pinkAccent
+                    ),
+                    height: 4.0,
+                  ),
+
+                  Flexible(
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data['post_views'].length,
+                      itemBuilder: (BuildContext context, int index) {
+                        String key = snapshot.data['post_views'].keys.elementAt(index);
+                        Timestamp kv = snapshot.data['post_views'][key];
+                        String kvs = timeago.format(kv.toDate());
+                        //timeago.format(timestamp.toDate())
+                        return new Column(
+                          children: <Widget>[
+                            new ListTile(
+                              title: new Text("$key",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                              ),
+                              subtitle: new Text("$kvs",
+                                style: TextStyle(fontSize: 16.0, color: Colors.blueGrey[700]),
+                              ),
+                            ),
+                            new Divider(
+                              height: 2.0,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RaisedButton.icon(
+                            color: Colors.black,
+                            elevation: 7.0,
+                            onPressed: () {},
+                            icon: Icon(Icons.delete_forever, color: Colors.red, size: 30.0,),
+                            label: Text('RESET',
+                              style: TextStyle(color: Colors.red, fontSize: 19.0),
+                            )
+                        )
+                      ),
+                    ),
+                  ),
 
                 ],
               ),

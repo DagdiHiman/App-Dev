@@ -80,7 +80,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   label: Text("Click Here",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.black),
                   ),
-                  onPressed: () => _showSettingsPanel(),
+                  onPressed: () => _showSettingsPanel1(),
                 ),
               ],
             ),
@@ -115,7 +115,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   label: Text("Click Here",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.black),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => _showSettingsPanel2(),
                 ),
               ],
             ),
@@ -133,7 +133,7 @@ class _SettingsFormState extends State<SettingsForm> {
     );
 
   }
-  void _showSettingsPanel() {
+  void _showSettingsPanel1() {
     showModalBottomSheet(context: context, builder: (context) {
       return Container(
         padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
@@ -141,4 +141,14 @@ class _SettingsFormState extends State<SettingsForm> {
       );
     });
   }
+
+  void _showSettingsPanel2() {
+    showModalBottomSheet(context: context, builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+        child: PostVisits(userId: userId, postId: postId,),
+      );
+    });
+  }
+
 }

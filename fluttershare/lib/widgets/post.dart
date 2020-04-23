@@ -10,6 +10,7 @@ import 'package:fluttershare/pages/settings_form.dart';
 import 'package:fluttershare/widgets/custom_image.dart';
 import 'package:fluttershare/widgets/progress.dart';
 import 'package:fluttershare/pages/home.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class Post extends StatefulWidget {
   final String postId;
@@ -468,13 +469,25 @@ class _PostState extends State<Post> {
 
     isLiked = (likes[currentUserId]== true);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(),
-        buildPostImage(),
-        buildPostFooter()
-      ],
+    return VisibilityDetector(
+      key: Key("unique key"),
+      onVisibilityChanged: (VisibilityInfo info) {
+        var visiblePercentage = info.visibleFraction * 100;
+        debugPrint("=> ${visiblePercentage.toInt()}% of $postId is visible ");
+        String dn = currentUser.displayName;
+        postRef.document(ownerId)
+            .collection('userPosts')
+            .document(postId)
+            .updateData({ 'post_views.$dn' : timestamp });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          buildPostHeader(),
+          buildPostImage(),
+          buildPostFooter()
+        ],
+      ),
     );
   }
 }
