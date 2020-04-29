@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttershare/pages/profileVisits.dart';
-import 'package:fluttershare/widgets/progress.dart';
-
-import 'home.dart';
 
 
 class SettingsForm extends StatefulWidget {

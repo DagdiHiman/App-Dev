@@ -1,5 +1,4 @@
 import 'dart:async';
-//import 'package:animator/animator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:fluttershare/widgets/custom_image.dart';
 import 'package:fluttershare/widgets/progress.dart';
 import 'package:fluttershare/pages/home.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+//import 'package:animator/animator.dart';
 
 class Post extends StatefulWidget {
   final String postId;
@@ -430,12 +430,6 @@ class _PostState extends State<Post> {
         .document(postId)
         .updateData({ 'pcount.$cudn' : timestamp });
 
-//    DocumentSnapshot doc = await postRef.document(ownerId)
-//        .collection('userPosts')
-//        .document(postId)
-//        .get();
-//    print("$doc['profileCount']");
-
       Firestore.instance.
       collection('posts').
       document(profileId).
@@ -444,14 +438,6 @@ class _PostState extends State<Post> {
       updateData({
         'profileCount': FieldValue.increment(1),
       });
-
-//    setState(() {
-//      //profileCount += 1;
-//    });
-//    postRef.document(ownerId)
-//        .collection('userPosts')
-//        .document(postId)
-//        .updateData({ 'profileCount' : 1 });
 
 
     Navigator.push(

@@ -203,7 +203,7 @@ class PostVisits extends StatelessWidget {
             return circularProgress();
           }
 
-          Map<String,dynamic> myMap = Map.from( snapshot.data['post_views'] );
+          //Map<String,dynamic> myMap = Map.from( snapshot.data['post_views'] );
 
           return Center(
             child: Scaffold(

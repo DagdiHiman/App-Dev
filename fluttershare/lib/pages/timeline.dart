@@ -1,28 +1,5 @@
-/*import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttershare/widgets/header.dart';
-import 'package:fluttershare/widgets/progress.dart';
-
-final userRef = Firestore.instance.collection('users');
-
-class Timeline extends StatefulWidget {
-  @override
-  _TimelineState createState() => _TimelineState();
-}
-
-class _TimelineState extends State<Timeline> {
-
-  @override
-  Scaffold build(context) {
-    return Scaffold(
-      appBar: header(isAppTitle: true),
-      body: Text('Timeline'),
-    );
-  }
-}
-*/
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/home.dart';
@@ -30,6 +7,7 @@ import 'package:fluttershare/pages/search.dart';
 import 'package:fluttershare/widgets/header.dart';
 import 'package:fluttershare/widgets/post.dart';
 import 'package:fluttershare/widgets/progress.dart';
+import 'package:fluttershare/widgets/stories_list.dart';
 
 final usersRef = Firestore.instance.collection('users');
 
@@ -76,13 +54,51 @@ class _TimelineState extends State<Timeline> {
     });
   }
 
+  ///////////////
+
+  Widget _horizontalListView() {
+    return SizedBox(
+      height: 120,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (_, __) => _buildBox(color: Colors.orange),
+      ),
+    );
+  }
+
+  Widget _buildBox({Color color}) => Container(margin: EdgeInsets.all(12), height: 100, width: 200, color: color);
+
+  /////////////
+
   buildTimeline() {
     if (posts == null) {
       return circularProgress();
     } else if (posts.isEmpty) {
       return buildUsersToFollow();
     } else {
-      return ListView(children: posts);
+      //return ListView(children: posts);
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                //_horizontalListView(),
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  height: 100.0 ,
+                  child: StoriesList(),
+                ),
+                ListView(
+                    children: posts,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      );
+
     }
   }
 
@@ -148,7 +164,69 @@ class _TimelineState extends State<Timeline> {
   Widget build(context) {
     return Scaffold(
         appBar: header(isAppTitle: true),
-        body: RefreshIndicator(
-            onRefresh: () => getTimeline(), child: buildTimeline()));
+        body: Column(
+          children: [
+            Expanded(
+              child: RefreshIndicator(
+                  onRefresh: () => getTimeline(), child: buildTimeline()),
+            ),
+          ],
+        ));
   }
 }
+
+
+/*
+
+1
+//      return SingleChildScrollView(
+//        child: Column(
+//          mainAxisSize: MainAxisSize.min,
+//          children: <Widget>[
+//            _horizontalListView(),
+//
+//            SizedBox(
+//              height: 800,
+//              child: ListView(
+//                  children: posts,
+//                  shrinkWrap: true,
+//                ),
+//            ),
+//
+//          ],
+//        ),
+//      );
+
+2
+//    return Flexible(
+//      child: ListView.builder(
+//        itemCount: 2,
+//        itemBuilder: (_, i) {
+//          if (i == 1) {
+//            return Container(
+//              height: 100,
+//              color: Colors.blue,
+//            );
+//          }
+//          else {
+//            return SizedBox(
+//                height: 400,
+//                child: ListView(children: posts)
+//            );
+//          }
+//        },
+//      ),
+//    );
+
+3
+//    return ListView(
+//      physics: ClampingScrollPhysics(),
+//      shrinkWrap: true,
+//      children: <Widget>[
+//        _horizontalListView(),
+//        SizedBox(height:800,child: ListView(children: posts)),
+//      ],
+//    );
+
+
+ */

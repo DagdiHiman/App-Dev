@@ -38,11 +38,7 @@ class PostScreen extends StatelessWidget {
         );
           },
     );
-
-
-
   }
-  //Future<String> profilecounts() as
 }
 
 
