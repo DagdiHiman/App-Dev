@@ -1,5 +1,11 @@
 # Flutter E-commerce App
 
+#### [Flutter Ecommerce App APK](https://drive.google.com/file/d/11av1oFejRSmK5QLzIjh2smFxBWqsnYXD/view?usp=sharing)
+
+### Screenshots
+<img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/ecom1.jpeg" height=300>  <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/ecom2.jpeg" height=300>  <img src="https://github.com/DagdiHiman/App-Dev/blob/master/demo/ecom3.jpeg" height=300>
+##### home------------------->cart------------------->payment
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
