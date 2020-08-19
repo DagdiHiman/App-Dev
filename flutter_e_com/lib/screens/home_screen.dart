@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_amazon_ui_redesign/models/product_model.dart';
-import 'package:flutter_amazon_ui_redesign/screens/api_products.dart';
-import 'package:flutter_amazon_ui_redesign/screens/cart_screen.dart';
-import 'package:flutter_amazon_ui_redesign/widgets/product_carousel.dart';
-import 'package:flutter_amazon_ui_redesign/widgets/responsive_widget.dart';
+import '../models/product_model.dart';
+import '../screens/api_products.dart';
+import '../screens/cart_screen.dart';
+import '../widgets/product_carousel.dart';
+import '../widgets/responsive_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
